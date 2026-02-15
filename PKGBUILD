@@ -48,7 +48,7 @@ package() {
   unset PERL5LIB PERL_LOCAL_LIB_ROOT PERL_MB_OPT PERL_MM_OPT
   make DESTDIR="$pkgdir" install
 
-  install -Dm444 "$srcdir"/needrestart.hook "$pkgdir"/usr/share/libalpm/hooks/needrestart.hook
+  install -vDm444 "$srcdir"/needrestart.hook "$pkgdir"/usr/share/libalpm/hooks/needrestart.hook
   install -vDm644 "$srcdir"/"${pkgname%-git}"/man/needrestart.1 "$pkgdir"/usr/share/man/man1/needrestart.1
 
   # remove empty dirs; '!emptydirs' doesn't remove them
