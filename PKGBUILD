@@ -1,7 +1,8 @@
-# Maintainer: Mark Wagie <mark dot wagie at proton dot me>
+# Maintainer: csmantle <aur at csmantle dot top>
+# Contributor: Mark Wagie <mark dot wagie at proton dot me>
 pkgname=needrestart-git
-pkgver=3.8.r43.g715366d
-pkgrel=1
+pkgver=3.11.r0.g6d7a76b
+pkgrel=2
 pkgdesc="Restart daemons after library updates."
 arch=('any')
 url="https://github.com/liske/needrestart"
@@ -20,8 +21,10 @@ provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
 backup=("etc/${pkgname%-git}/${pkgname%-git}.conf"
         "etc/${pkgname%-git}/notify.conf")
-source=('git+https://github.com/liske/needrestart.git')
-sha256sums=('SKIP')
+source=('git+https://github.com/liske/needrestart.git'
+        'needrestart.hook')
+sha256sums=('SKIP'
+            'e5c6696a281f5445a3b7e2b7d1055f9189a2c39d4940721aa0c2718780f15f63')
 
 pkgver() {
   cd "${pkgname%-git}"
@@ -44,6 +47,8 @@ package() {
   cd "${pkgname%-git}"
   unset PERL5LIB PERL_LOCAL_LIB_ROOT PERL_MB_OPT PERL_MM_OPT
   make DESTDIR="$pkgdir/" install
+
+  install -Dm444 "$srcdir"/needrestart.hook "$pkgdir"/usr/share/libalpm/hooks/needrestart.hook
 
   # remove empty dirs; '!emptydirs' doesn't remove them
   rm -rf "$pkgdir/usr/lib/perl5/"
