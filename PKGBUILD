@@ -2,7 +2,7 @@
 # Contributor: Mark Wagie <mark dot wagie at proton dot me>
 pkgname=needrestart-git
 pkgver=3.11.r0.g6d7a76b
-pkgrel=2
+pkgrel=3
 pkgdesc="Restart daemons after library updates."
 arch=('any')
 url="https://github.com/liske/needrestart"
@@ -49,6 +49,7 @@ package() {
   make DESTDIR="$pkgdir" install
 
   install -Dm444 "$srcdir"/needrestart.hook "$pkgdir"/usr/share/libalpm/hooks/needrestart.hook
+  install -vDm644 "$srcdir"/"${pkgname%-git}"/man/needrestart.1 "$pkgdir"/usr/share/man/man1/needrestart.1
 
   # remove empty dirs; '!emptydirs' doesn't remove them
   rm -rf "$pkgdir"/usr/lib/perl5/
