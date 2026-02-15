@@ -27,29 +27,29 @@ sha256sums=('SKIP'
             'e5c6696a281f5445a3b7e2b7d1055f9189a2c39d4940721aa0c2718780f15f63')
 
 pkgver() {
-  cd "${pkgname%-git}"
+  cd "$srcdir"/"${pkgname%-git}"
   git describe --long --tags --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
-  cd "${pkgname%-git}"
+  cd "$srcdir"/"${pkgname%-git}"
   find . -type f -exec sed -i 's/sbin/bin/g' {} \;
 }
 
 build() {
-  cd "${pkgname%-git}"
+  cd "$srcdir"/"${pkgname%-git}"
   unset PERL5LIB PERL_LOCAL_LIB_ROOT PERL_MB_OPT PERL_MM_OPT
   export PERL_MM_USE_DEFAULT=1 PERL_AUTOINSTALL=--skipdeps
   make
 }
 
 package() {
-  cd "${pkgname%-git}"
+  cd "$srcdir"/"${pkgname%-git}"
   unset PERL5LIB PERL_LOCAL_LIB_ROOT PERL_MB_OPT PERL_MM_OPT
-  make DESTDIR="$pkgdir/" install
+  make DESTDIR="$pkgdir" install
 
   install -Dm444 "$srcdir"/needrestart.hook "$pkgdir"/usr/share/libalpm/hooks/needrestart.hook
 
   # remove empty dirs; '!emptydirs' doesn't remove them
-  rm -rf "$pkgdir/usr/lib/perl5/"
+  rm -rf "$pkgdir"/usr/lib/perl5/
 }
