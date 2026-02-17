@@ -2,7 +2,7 @@
 # Contributor: Mark Wagie <mark dot wagie at proton dot me>
 pkgname=needrestart-git
 pkgver=3.11.r0.g6d7a76b
-pkgrel=3
+pkgrel=4
 pkgdesc="Restart daemons after library updates."
 arch=('any')
 url="https://github.com/liske/needrestart"
@@ -22,9 +22,11 @@ conflicts=("${pkgname%-git}")
 backup=("etc/${pkgname%-git}/${pkgname%-git}.conf"
         "etc/${pkgname%-git}/notify.conf")
 source=('git+https://github.com/liske/needrestart.git'
-        'needrestart.hook')
+        'needrestart.hook'
+        '0001-vmlinuz-get-version-implement-decompression-for-LZ4-.patch')
 sha256sums=('SKIP'
-            'e5c6696a281f5445a3b7e2b7d1055f9189a2c39d4940721aa0c2718780f15f63')
+            'e5c6696a281f5445a3b7e2b7d1055f9189a2c39d4940721aa0c2718780f15f63'
+            '2e1461bafe2775f3f8b722b5268679f1cdf1ef446dc9f117f261cdfb03fce267')
 
 pkgver() {
   cd "$srcdir"/"${pkgname%-git}"
@@ -33,6 +35,9 @@ pkgver() {
 
 prepare() {
   cd "$srcdir"/"${pkgname%-git}"
+  for f in "$srcdir"/*.patch; do
+    patch -N -p1 -i "$f"
+  done
   find . -type f -exec sed -i 's/sbin/bin/g' {} \;
 }
 
