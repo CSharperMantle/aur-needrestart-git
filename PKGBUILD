@@ -2,7 +2,7 @@
 # Contributor: Mark Wagie <mark dot wagie at proton dot me>
 pkgname=needrestart-git
 pkgver=3.11.r0.g6d7a76b
-pkgrel=5
+pkgrel=6
 pkgdesc="Restart daemons after library updates."
 arch=('any')
 url="https://github.com/liske/needrestart"
@@ -27,8 +27,8 @@ source=('git+https://github.com/liske/needrestart.git'
         '0002-AOSCOS-normalize-sbin-bin.patch')
 sha256sums=('SKIP'
             'e5c6696a281f5445a3b7e2b7d1055f9189a2c39d4940721aa0c2718780f15f63'
-            '793f8e3aef07040b5be7e215277551cc6efcf654409a9701a00ad4970271af6b'
-            '70281f4bb74ada5aa9ceee7916fe83ed455415960495f836f595ceef4b192c3f')
+            '1bdb982d39c09ac871362500b7e3da46fc575b7f5a2a352a76b8ab87984a66e7'
+            '8bf6b0f082e4590231c6a360ebbd1f5952bf320b28221f8935fd5f5b21667107')
 
 pkgver() {
   cd "$srcdir"/"${pkgname%-git}"

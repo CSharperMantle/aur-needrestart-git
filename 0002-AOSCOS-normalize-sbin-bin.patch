@@ -1,4 +1,4 @@
-From ab5c3b7c0c7992dc8d606917c05e4cf81727b8bf Mon Sep 17 00:00:00 2001
+From 2b5c61afb1827d3628b032ef7836c335b710b93e Mon Sep 17 00:00:00 2001
 From: Rong Bao <rong.bao@csmantle.top>
 Date: Tue, 17 Feb 2026 19:09:40 +0800
 Subject: [PATCH 2/2] AOSCOS: normalize sbin -> bin
@@ -12,8 +12,7 @@ Subject: [PATCH 2/2] AOSCOS: normalize sbin -> bin
  ex/nagios/check_needrestart                | 2 +-
  ex/nagios/needrestart-nagios               | 2 +-
  ex/polkit/net.fiasko-nw.needrestart.policy | 2 +-
- needrestart                                | 2 +-
- 9 files changed, 11 insertions(+), 11 deletions(-)
+ 8 files changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/Makefile b/Makefile
 index 1ab274a..1332759 100644
@@ -108,19 +107,6 @@ index 65d20cd..d2287da 100644
      <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
    </action>
  
-diff --git a/needrestart b/needrestart
-index ad7e4aa..1be72e4 100755
---- a/needrestart
-+++ b/needrestart
-@@ -785,7 +785,7 @@ if(defined($opt_l)) {
- 	    }
- 	    else {
- 		# sysv init
--		if($pid == 1 && $exe =~ m@^/sbin/init@) {
-+		if($pid == 1 && $exe =~ m@^/bin/init@) {
- 		    print STDERR "$LOGPREF #$pid is sysv init\n" if($nrconf{verbosity} > 1);
- 		    $restart{q(sysv-init)}++;
- 		    next;
 -- 
 2.53.0
 
